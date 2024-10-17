@@ -12,17 +12,8 @@
     Instalar as dependências necessárias com o pip
     Conta ou acesso à API do modelo Groq
 
-Para executar o chatbot, rode o script chatbot_groq.py:
-
-python chatbot_groq.py
+Para executar o chatbot, rode o script main.py:
 O chatbot estará pronto para receber entradas do usuário e responder em português, mantendo o contexto da conversa.
-
-Estrutura do Projeto
-├── chatbot_groq.py        # Script principal do chatbot
-├ .env                     # Arquivo com as variáveis de ambiente
-├ main.py                  # Inicializador do arquivo
-├ venv                     # Ambiente virtual
-└ README.md                # Este arquivo
 
 Dependências
 LangChain
