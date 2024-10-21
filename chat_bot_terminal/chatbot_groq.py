@@ -1,12 +1,12 @@
 from langchain.memory import ConversationBufferMemory
 from langchain_groq import ChatGroq
-from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
 from dotenv import load_dotenv
 import os
 
-def chat_bot():
-    #.env
+def initialize_chatbot():
+    # Carregar variáveis de ambiente
     load_dotenv()
 
     # Definir personalidade assumida pelo Bot
@@ -25,18 +25,38 @@ def chat_bot():
     # Configurar a memória da conversa
     memory = ConversationBufferMemory(memory_key="chat_history", input_key='input')
 
-    # Configurar a cadeia do modelo LLM
+    # Configura a cadeia do modelo LLM
     llm_chain = LLMChain(llm=llm, prompt=base_prompt, memory=memory)
 
-    # Limpar o terminal
-    os.system("cls")
+    if llm_chain:
+        print("Chatbot inicializado com sucesso.")
+    else:
+        print("Erro ao inicializar o chatbot.")
 
-    while True:
+    return llm_chain
 
-        user_input = input("Você: ")        
-        if not user_input:
-            break  # Sai do loop
+def generate_response(user_input, llm_chain):
+    try:
+        response = llm_chain.invoke(input=user_input)
+        # Verifica se a resposta é um dicionário e tem o campo 'text'
+        if isinstance(response, dict) and 'text' in response:
+            return response['text']
+        else:
+            return "Desculpe, não consegui entender sua pergunta."
         
-        # Gerar a resposta usando o modelo de linguagem
-        response = llm_chain.run(input=user_input)
-        print(f"Assistente: {response}")
+    except Exception as e:
+        response = f"Erro ao processar a resposta: {str(e)}"
+
+
+# Exemplo de execução para testar a função de resposta
+#if __name__ == "__main__":
+#    llm_chain = initialize_chatbot()
+#    if llm_chain:
+#        while True:
+#            user_input = input("Você: ")
+#            if not user_input:
+#                break  # Sai do loop
+#
+#            # Gerar a resposta usando o modelo de linguagem
+#            response = generate_response(user_input, llm_chain)
+#            print(f"Assistente: {response}")

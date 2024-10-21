@@ -1,0 +1,36 @@
+<ChatWindow>:
+    orientation: 'vertical'
+
+    # ScrollView para as mensagens
+    ScrollView:
+        id: scroll_view
+        size_hint: (1, 1)
+        do_scroll_x: False  # Desativa a rolagem horizontal
+        do_scroll_y: True   # Ativa a rolagem vertical
+        
+        BoxLayout:
+            id: messages_layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height  # Ajusta a altura automaticamente ao adicionar mensagens
+            padding: 10
+            spacing: 10   
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 40
+
+        TextInput:
+            id: input_field
+            multiline: True
+            hint_text: "Digite sua mensagem"
+            size_hint_x: 0.8  # Ajusta a largura do campo de entrada
+            on_text_validate: root.send_message(self)
+
+        Button:
+            text: "Enviar"
+            size_hint_x: 0.2  # Ajusta a largura do botão
+            on_release: root.send_message(self)
+    
+
