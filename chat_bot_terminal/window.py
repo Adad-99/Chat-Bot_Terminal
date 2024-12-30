@@ -3,7 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.clock import Clock
-from chat_bot_terminal.chatbot_groq import initialize_chatbot, generate_response  # Importa as funções do chatbot
+from chat_bot_terminal.chatBot import initialize_chatbot, generate_response  # Importa as funções do chatbot
 
 gui = Builder.load_file("chat_bot_terminal\\window.kv")
 
